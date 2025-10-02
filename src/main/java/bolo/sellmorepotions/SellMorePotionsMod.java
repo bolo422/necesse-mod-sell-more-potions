@@ -10,8 +10,11 @@ public class SellMorePotionsMod {
     public void preInit() {
         System.out.println("Sell More Potions Mod pre-initialization started!");
         config = new Config("settings.cfg");
-        String potionsAdded = config.getPotions().keySet().stream().reduce((a, b) -> a + ", " + b).orElse("none");
+        String potionsAdded = config.getPotions().stream()
+                .map(potion -> potion.name)
+                .reduce((a, b) -> a + ", " + b)
+                .orElse("none");
         System.out.println(
-                "Sell More Potions Mod initialization completed! The potions added are {" + potionsAdded + "}");
+                "Sell More Potions Mod initialization completed! The potions loaded are {" + potionsAdded + "}");
     }
 }
